@@ -1,3 +1,4 @@
+import { formatMentoringTime } from '@/lib/mentor-stats'
 import { Mentor } from '@/lib/type'
 
 export function MentorSidebar({ mentor }: { mentor: Mentor }) {
@@ -23,13 +24,13 @@ export function MentorSidebar({ mentor }: { mentor: Mentor }) {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-2">
         {[
-          { value: mentor.session_count, label: 'Sessions' },
-          { value: mentor.mentee_count, label: 'Mentees' },
+          { value: formatMentoringTime(mentor.total_mentoring_time), label: 'Mentoring time' },
+          { value: mentor.sessions_completed ?? 0, label: 'Completed' },
           { value: mentor.rating, label: 'Rating' },
         ].map(stat => (
           <div key={stat.label} className="bg-white border border-gray-100 rounded-lg p-2 text-center">
             <p className="font-medium text-gray-900 text-sm">{stat.value}</p>
-            <p className="text-gray-400 text-[10px] mt-0.5">{stat.label}</p>
+            <p className="text-gray-400 text-[10px] leading-tight mt-0.5">{stat.label}</p>
           </div>
         ))}
       </div>

@@ -15,8 +15,8 @@ async function seed(){
         company: mentor.company,
         bio: mentor.bio,
         expertise_tags: mentor.expertise_tags,
-        session_count: mentor.session_count,
-        mentee_count: mentor.mentee_count,
+        total_mentoring_time: mentor.total_mentoring_time,
+        sessions_completed: mentor.sessions_completed,
         rating: mentor.rating,
         adplist_url: mentor.adplist_url,
         twin_active: true

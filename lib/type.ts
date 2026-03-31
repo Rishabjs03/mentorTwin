@@ -7,8 +7,8 @@ export type Mentor = {
   avatar_url?: string
   bio: string
   expertise_tags: string[]
-  session_count: number
-  mentee_count: number
+  total_mentoring_time: number | string | null
+  sessions_completed: number | null
   rating: number
   adplist_url?: string
   twin_active: boolean

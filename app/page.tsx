@@ -1,4 +1,5 @@
 import { supabaseAdmin } from '@/lib/supabase'
+import { formatMentoringTime } from '@/lib/mentor-stats'
 import Link from 'next/link'
 
 export default async function HomePage() {
@@ -6,7 +7,7 @@ export default async function HomePage() {
     .from('mentors')
     .select('*')
     .eq('twin_active', true)
-    .order('session_count', { ascending: false })
+    .order('sessions_completed', { ascending: false })
 
   return (
     <main className="min-h-screen bg-gray-50">
@@ -21,8 +22,8 @@ export default async function HomePage() {
             Get mentorship without scheduling a meeting
           </h1>
           <p className="text-gray-500 text-lg max-w-xl">
-            Every mentor's knowledge is encoded from their real sessions. 
-            Ask anything, get guidance grounded in what they've actually taught.
+            Every mentor&rsquo;s knowledge is encoded from their real sessions.
+            Ask anything, get guidance grounded in what they&rsquo;ve actually taught.
           </p>
         </div>
 
@@ -56,11 +57,23 @@ export default async function HomePage() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-4 text-sm text-gray-500 border-t border-gray-50 pt-3">
-                <span>{mentor.session_count} sessions</span>
-                <span>{mentor.mentee_count} mentees</span>
-                <span>⭐ {mentor.rating}</span>
-                <span className="ml-auto text-emerald-600 text-sm font-medium group-hover:underline">
+              <div className="grid grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)_auto_auto] items-start gap-3 border-t border-gray-50 pt-3 text-sm text-gray-500">
+                <div className="min-w-0">
+                  <p className="font-medium text-gray-700 whitespace-nowrap">
+                    {formatMentoringTime(mentor.total_mentoring_time)}
+                  </p>
+                  <p className="text-xs text-gray-400">Mentoring time</p>
+                </div>
+                <div className="min-w-0">
+                  <p className="font-medium text-gray-700 whitespace-nowrap">
+                    {new Intl.NumberFormat('en-US').format(mentor.sessions_completed ?? 0)}
+                  </p>
+                  <p className="text-xs text-gray-400">Completed</p>
+                </div>
+                <div className="pt-0.5 font-medium text-gray-700 whitespace-nowrap pt-2">
+                  ⭐ {mentor.rating}
+                </div>
+                <span className="justify-self-end whitespace-nowrap text-emerald-600 text-sm font-medium group-hover:underline pt-2">
                   Ask their Twin →
                 </span>
               </div>

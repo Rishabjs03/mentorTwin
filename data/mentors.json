@@ -15,8 +15,8 @@
       "Growth Product Management",
       "Growth Hacking"
     ],
-    "session_count": 0,
-    "mentee_count": 0,
+    "total_mentoring_time": 17635,
+    "sessions_completed": 837,
     "rating": 5,
     "knowledge_chunks": [
       {
@@ -100,8 +100,8 @@
     "company": "Google",
     "bio": "8 years in product across Google, Stripe, and two YC startups. I specialize in helping early-career folks break into PM roles and navigate career transitions.",
     "expertise_tags": ["Career pivots", "Salary negotiation", "PM interviews", "Leadership"],
-    "session_count": 127,
-    "mentee_count": 89,
+    "total_mentoring_time": 7620,
+    "sessions_completed": 127,
     "rating": 4.9,
     "adplist_url": "https://adplist.org/mentors/sarah-chen",
     "knowledge_chunks": [

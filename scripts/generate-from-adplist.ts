@@ -7,24 +7,76 @@ import fs from 'fs'
 const ADPLIST_TOKEN = process.env.ADPLIST_TOKEN!
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY! })
 
-async function fetchMentorProfile(slug: string) {
+type AdplistMentorProfile = {
+  fullName: string
+  bio: string
+  profile: {
+    slug: string
+    title: string
+    organization: string
+    image: string
+  }
+  experiences?: {
+    tools?: Array<{ tool: string }>
+    disciplines?: Array<{ discipline: string }>
+    skills?: Array<{ skill: string }>
+    rankedExpertise?: Array<{ expertise: { expertise: string } }>
+  }
+  preferences?: {
+    topicPacks?: Array<{ packs: Array<{ title: string }> }>
+  }
+}
+
+type GeneratedKnowledgeChunk = {
+  source_label: string
+  source_type: string
+  topics: string[]
+  content: string
+}
+
+type GeneratedMentor = {
+  slug: string
+  name: string
+  title: string
+  company: string
+  bio: string
+  avatar_url: string
+  adplist_url: string
+  expertise_tags: string[]
+  total_mentoring_time: number
+  sessions_completed: number
+  rating: number
+  _raw: {
+    tools: string[]
+    disciplines: string[]
+    skills: string[]
+    topicPacks: string[]
+    expertiseAreas: string[]
+  }
+}
+
+type MentorSeedRecord = Omit<GeneratedMentor, '_raw'> & {
+  knowledge_chunks: GeneratedKnowledgeChunk[]
+}
+
+async function fetchMentorProfile(slug: string): Promise<AdplistMentorProfile> {
   const res = await fetch(
     `https://api.adplist.org/users/profile/mentor/${slug}`,
     { headers: { Authorization: `Token ${ADPLIST_TOKEN}` } }
   )
-  const json = await res.json()
+  const json = await res.json() as { data: AdplistMentorProfile }
   return json.data
 }
 
-function extractMentorFields(data: any) {
-  const tools = data.experiences?.tools?.map((t: any) => t.tool) || []
-  const disciplines = data.experiences?.disciplines?.map((d: any) => d.discipline) || []
+function extractMentorFields(data: AdplistMentorProfile): GeneratedMentor {
+  const tools = data.experiences?.tools?.map(t => t.tool) || []
+  const disciplines = data.experiences?.disciplines?.map(d => d.discipline) || []
   const topicPacks = data.preferences?.topicPacks?.flatMap(
-    (tp: any) => tp.packs.map((p: any) => p.title)
+    topicPack => topicPack.packs.map(pack => pack.title)
   ) || []
-  const skills = data.experiences?.skills?.map((s: any) => s.skill) || []
+  const skills = data.experiences?.skills?.map(skill => skill.skill) || []
   const expertiseAreas = data.experiences?.rankedExpertise?.map(
-    (r: any) => r.expertise.expertise
+    ranked => ranked.expertise.expertise
   ) || []
   const expertise_tags = [...disciplines, ...tools].slice(0, 6)
 
@@ -37,14 +89,14 @@ function extractMentorFields(data: any) {
     avatar_url: data.profile.image,
     adplist_url: `https://adplist.org/mentors/${data.profile.slug}`,
     expertise_tags,
-    session_count: 0,
-    mentee_count: 0,
+    total_mentoring_time: 0,
+    sessions_completed: 0,
     rating: 5.0,
     _raw: { tools, disciplines, skills, topicPacks, expertiseAreas }
   }
 }
 
-async function generateKnowledgeChunks(mentor: any) {
+async function generateKnowledgeChunks(mentor: GeneratedMentor): Promise<GeneratedKnowledgeChunk[]> {
   const { _raw } = mentor
 
   const prompt = `You are generating realistic mentorship knowledge chunks for a RAG-based AI mentor twin system.
@@ -99,7 +151,7 @@ Return ONLY a valid JSON array, no markdown, no explanation:
     throw new Error(`No JSON array found in GPT response. Raw: ${raw.slice(0, 500)}`)
   }
 
-  return JSON.parse(arrayMatch[0])
+  return JSON.parse(arrayMatch[0]) as GeneratedKnowledgeChunk[]
 }
 
 async function run() {
@@ -118,14 +170,26 @@ async function run() {
   const chunks = await generateKnowledgeChunks(mentor)
   console.log(`Generated ${chunks.length} chunks`)
 
-  const { _raw, ...mentorClean } = mentor
-  const finalMentor = { ...mentorClean, knowledge_chunks: chunks }
+  const finalMentor: MentorSeedRecord = {
+    slug: mentor.slug,
+    name: mentor.name,
+    title: mentor.title,
+    company: mentor.company,
+    bio: mentor.bio,
+    avatar_url: mentor.avatar_url,
+    adplist_url: mentor.adplist_url,
+    expertise_tags: mentor.expertise_tags,
+    total_mentoring_time: mentor.total_mentoring_time,
+    sessions_completed: mentor.sessions_completed,
+    rating: mentor.rating,
+    knowledge_chunks: chunks,
+  }
 
   const outputPath = './data/mentors.json'
-  let existing: any[] = []
+  let existing: MentorSeedRecord[] = []
   if (fs.existsSync(outputPath)) {
-    existing = JSON.parse(fs.readFileSync(outputPath, 'utf-8'))
-    existing = existing.filter((m: any) => m.slug !== slug)
+    existing = JSON.parse(fs.readFileSync(outputPath, 'utf-8')) as MentorSeedRecord[]
+    existing = existing.filter(mentorRecord => mentorRecord.slug !== slug)
   }
   existing.push(finalMentor)
   fs.writeFileSync(outputPath, JSON.stringify(existing, null, 2))

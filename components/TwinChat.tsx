@@ -6,6 +6,7 @@ import { Message } from '@/lib/type'
 import { MessageBubble } from './MessageBubble'
 
 const SUGGESTIONS = [
+  'How can i start with my design career?',
   'How do I negotiate a salary offer?',
   'I want to switch careers, where do I start?',
   'How do I prepare for a PM interview?',
