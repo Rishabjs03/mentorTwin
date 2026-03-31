@@ -6,7 +6,7 @@ import { MessageBubble } from './MessageBubble'
 
 const SUGGESTIONS = [
   'How do I negotiate a salary offer?',
-  'I want to switch careers — where do I start?',
+  'I want to switch careers, where do I start?',
   'How do I prepare for a PM interview?',
 ]
 
