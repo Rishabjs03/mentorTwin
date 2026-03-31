@@ -1,0 +1,140 @@
+[
+  {
+    "slug": "Felix-Lee",
+    "name":"Felix Lee",
+    "title": "Co-founder and CEO",
+    "company": "ADPList",
+    "bio": "Felix is the Co-founder & CEO of ADPList and sets the vision and strategy for the company. Founded in 2021, the company grew into a global platform on a mission to help every person unlock their human potential. With 30K+ Mentors from companies like Netflix, Airbnb, and Google, hosting over 100 million minutes of sessions on topics such as product design, product management, and coding in 140+ countries.\n\nAs a designer, Felix has embedded his creative roots in ADPList's culture, product, and community.\n\nFeatured on Forbes 30 under 30 Asia List and Tatler's Generation T Future Leader List in 2023. In 2021, ADPList raised $1.3 million from Sequoia Capital India and Goodwater Capital.",
+    "avatar_url": "https://adplist-bucket.s3.amazonaws.com/media/profile_photos/2470ce2a92654020b16eaf5a2a49db44XqMa3.webp",
+    "adplist_url": "https://adplist.org/mentors/felix-lee",
+    "expertise_tags": [
+      "UX Design",
+      "UI/ Visual Design",
+      "Product Design",
+      "Generalist Product Management",
+      "Growth Product Management",
+      "Growth Hacking"
+    ],
+    "session_count": 0,
+    "mentee_count": 0,
+    "rating": 5,
+    "knowledge_chunks": [
+      {
+        "source_label": "Session transcript · Feb 2024",
+        "source_type": "session_transcript",
+        "topics": [
+          "ux design",
+          "product strategy"
+        ],
+        "content": "When designing a user experience, always start with user empathy. Conduct interviews or surveys to understand their pain points deeply. This will not only guide your design decisions but also help you create solutions that resonate with users and drive engagement."
+      },
+      {
+        "source_label": "Session transcript · Jan 2023",
+        "source_type": "session_transcript",
+        "topics": [
+          "growth product management",
+          "community management"
+        ],
+        "content": "Building a community around your product is essential for growth. Focus on creating value for your users through educational content and interaction. Engage with your community regularly, listen to their feedback, and iterate your product based on their needs—this will foster loyalty and advocacy."
+      },
+      {
+        "source_label": "Session transcript · Mar 2025",
+        "source_type": "session_transcript",
+        "topics": [
+          "growth hacking",
+          "content strategy"
+        ],
+        "content": "Leverage growth hacking techniques by experimenting with different content formats. For instance, if you're focused on LinkedIn Ads, create short video snippets that highlight your product's benefits. Analyze the performance metrics and double down on what resonates the most with your audience."
+      },
+      {
+        "source_label": "Session transcript · Apr 2024",
+        "source_type": "session_transcript",
+        "topics": [
+          "product design",
+          "communication"
+        ],
+        "content": "Effective communication is key in product design. Always present your ideas visually, using tools like Figma to create prototypes. This not only helps in conveying your vision clearly but also facilitates constructive feedback from stakeholders early in the process."
+      },
+      {
+        "source_label": "Session transcript · Jan 2024",
+        "source_type": "session_transcript",
+        "topics": [
+          "ui design",
+          "tools"
+        ],
+        "content": "When working on UI design, leverage tools like Amplitude to track user interactions. Understanding how users navigate through your interface can highlight areas that need refinement. Use this data to iterate on your designs, ensuring they align with user behavior."
+      },
+      {
+        "source_label": "Session transcript · Mar 2023",
+        "source_type": "session_transcript",
+        "topics": [
+          "generalist product management",
+          "growth design"
+        ],
+        "content": "As a generalist product manager, it's crucial to wear multiple hats. Embrace cross-functional collaboration by actively involving design, marketing, and development teams in the early stages of product development. This holistic approach leads to more innovative solutions and a smoother execution."
+      },
+      {
+        "source_label": "Session transcript · Feb 2025",
+        "source_type": "session_transcript",
+        "topics": [
+          "content creation",
+          "product strategy"
+        ],
+        "content": "In content creation, always align your messaging with your product strategy. Identify key themes that resonate with your target audience and create content that addresses these themes. Consistency in messaging will strengthen your brand identity and help in positioning your product effectively."
+      },
+      {
+        "source_label": "Session transcript · Mar 2024",
+        "source_type": "session_transcript",
+        "topics": [
+          "twitter ads",
+          "growth hacking"
+        ],
+        "content": "When using Twitter Ads for growth, focus on creating compelling visuals and concise messaging. Test different ad formats and audience segments to find what works best. Don't forget to track your performance metrics, as this will help you optimize your campaigns for maximum impact."
+      }
+    ]
+  },
+  {
+    "slug": "sarah-chen",
+    "name": "Sarah Chen",
+    "title": "Senior Product Manager",
+    "company": "Google",
+    "bio": "8 years in product across Google, Stripe, and two YC startups. I specialize in helping early-career folks break into PM roles and navigate career transitions.",
+    "expertise_tags": ["Career pivots", "Salary negotiation", "PM interviews", "Leadership"],
+    "session_count": 127,
+    "mentee_count": 89,
+    "rating": 4.9,
+    "adplist_url": "https://adplist.org/mentors/sarah-chen",
+    "knowledge_chunks": [
+      {
+        "source_label": "Session with Alex K. · Mar 2024",
+        "source_type": "session_transcript",
+        "topics": ["career", "transition", "transferable skills"],
+        "content": "When switching careers, always identify your transferable skills first. Don't focus on what you lack — focus on what you bring that others in the new field don't have. Your outsider perspective is often your biggest asset. Map every single skill you have to the new domain before you even apply anywhere. Your past experience is never wasted, it's just repositioned."
+      },
+      {
+        "source_label": "Group Q&A · Jan 2024",
+        "source_type": "qa",
+        "topics": ["salary", "negotiation", "compensation", "offer"],
+        "content": "Never give a number first. Always anchor high with a range, and make sure the bottom of your range is your actual target number. When they make an offer, pause before responding — silence is a powerful negotiation tool. Most people leave 10-20% on the table by accepting the first offer. Always negotiate total comp: equity, bonus, remote flexibility all have real dollar value."
+      },
+      {
+        "source_label": "Workshop: Breaking Into PM · Feb 2024",
+        "source_type": "session_transcript",
+        "topics": ["interview", "pm", "job application", "resume"],
+        "content": "The biggest mistake I see is candidates who talk about what they did, not the impact they created. Interviewers don't remember tasks — they remember outcomes. Every answer should follow: situation, action, result, and why it mattered to the business. For PM interviews specifically, always tie your answer back to user value and business metrics."
+      },
+      {
+        "source_label": "1:1 with Priya R. · Dec 2023",
+        "source_type": "session_transcript",
+        "topics": ["leadership", "management", "team", "manager"],
+        "content": "New managers often try to solve problems their team should solve. Your job shifts from doing to enabling. The best thing I learned: hold weekly 1:1s where you ask 'What's blocking you?' and then actually remove those blockers. Stop being the smartest person in the room — start being the person who makes everyone else smarter."
+      },
+      {
+        "source_label": "Office Hours · Nov 2023",
+        "source_type": "qa",
+        "topics": ["product", "roadmap", "prioritization", "strategy"],
+        "content": "Prioritization is the core PM skill nobody teaches properly. I use impact vs effort, but more importantly I always ask: what would we regret NOT doing in 6 months? And always be able to say clearly why you're NOT building something — that's as important as what you are building."
+      }
+    ]
+  }
+]

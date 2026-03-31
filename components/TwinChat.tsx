@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Message } from '@/lib/type'
 import { MessageBubble } from './MessageBubble'
 
@@ -11,6 +12,7 @@ const SUGGESTIONS = [
 ]
 
 export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorName: string }) {
+  const router = useRouter()
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
@@ -99,6 +101,15 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
   return (
     <div className="flex-1 flex flex-col min-w-0">
       <div className="px-5 py-3.5 border-b border-gray-100 flex items-center gap-2.5">
+        <button
+          onClick={() => router.push('/')}
+          className="flex-shrink-0 w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600 hover:text-gray-900"
+          aria-label="Go back to home"
+        >
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
         <div className="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[11px] font-medium">
           {mentorName.split(' ').map(n => n[0]).join('')}
         </div>
@@ -126,8 +137,8 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
         )}
 
         {messages.length === 1 && (
-          <div className="flex flex-col gap-2 mt-2">
-            <p className="text-xs text-gray-400">Try asking:</p>
+          <div className="flex flex-row gap-2 mt-2">
+            <p className="text-xs text-gray-400 pt-2">Try asking:</p>
             {SUGGESTIONS.map(s => (
               <button
                 key={s}

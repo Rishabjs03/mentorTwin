@@ -1,4 +1,4 @@
-import { supabase, supabaseAdmin } from '@/lib/supabase'
+import { supabaseAdmin } from '@/lib/supabase'
 import { MentorSidebar } from '@/components/MentorSidebar'
 import { TwinChat } from '@/components/TwinChat'
 import { notFound } from 'next/navigation'

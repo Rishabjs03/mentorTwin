@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { supabaseAdmin } from "@/lib/supabase";
 import { embedText } from "@/lib/embed";
-import  mentorsData from "../data/mentor.json";
+import  mentorsData from "../data/mentors.json";
 
 
 async function seed(){
