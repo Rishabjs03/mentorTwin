@@ -4,7 +4,7 @@ export function MessageBubble({ message }: { message: Message }) {
   const isUser = message.role === 'user'
 
   return (
-    <div className={`flex flex-col max-w-[85%] ${isUser ? 'self-end items-end' : 'self-start items-start'}`}>
+    <div className={`flex max-w-[92%] flex-col sm:max-w-[85%] ${isUser ? 'self-end items-end' : 'self-start items-start'}`}>
       <div className={`px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
         isUser
           ? 'bg-emerald-600 text-white rounded-br-sm'

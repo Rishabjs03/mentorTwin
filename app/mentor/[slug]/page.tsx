@@ -14,7 +14,7 @@ export default async function MentorPage({ params }: {params: Promise<{ slug: st
   if (!mentor) notFound()
 
   return (
-    <main className="h-screen flex overflow-hidden bg-white">
+    <main className="flex h-[100dvh] flex-col overflow-hidden bg-white lg:flex-row">
       <MentorSidebar mentor={mentor} />
       <TwinChat mentorId={mentor.id} mentorName={mentor.name} />
     </main>

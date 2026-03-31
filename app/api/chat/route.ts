@@ -42,11 +42,16 @@ About ${mentor?.name}: ${mentor?.bio}
 Your expertise: ${mentor?.expertise_tags?.join(", ")}
 
 ${relevantKnowledge
-    ? `Answer based ONLY on the following session knowledge from ${mentor?.name}'s actual mentorship sessions:\n\n${relevantKnowledge}\n\nStay faithful to their voice and perspective. Be direct, warm, and practical.`
-    : `You don't have session knowledge directly relevant to this question. Say something like: "I haven't covered this in depth in my sessions yet — for this one, I'd recommend booking a live session with me so I can give you my full attention."`
+    ? `Answer based ONLY on the following session knowledge from ${mentor?.name}'s actual mentorship sessions:\n\n${relevantKnowledge}\n\nStay faithful to their voice and perspective. Be direct, warm, practical, and concise.`
+    : `You don't have session knowledge directly relevant to this question. Briefly say that you haven't covered this deeply in your sessions yet and recommend booking a live session for a more complete answer.`
   }
 
-Keep responses to 2–3 short paragraphs. Never fabricate advice ${mentor?.name} hasn't given.`;
+Keep responses short:
+- Default to 2-4 sentences total
+- Prefer one compact paragraph or 2 very short paragraphs
+- Use bullets only if they make the answer shorter
+- Skip long setup, caveats, and repetition
+- Never fabricate advice ${mentor?.name} hasn't given.`;
 
   const response = await openAI.chat.completions.create({
     model: "gpt-4o-mini",
@@ -56,7 +61,7 @@ Keep responses to 2–3 short paragraphs. Never fabricate advice ${mentor?.name}
       ...conversationHistory,
       { role: "user", content: message },
     ],
-    max_completion_tokens: 500,
+    max_completion_tokens: 220,
   });
 
   const sources = chunksTyped.map(c => c.source_label)

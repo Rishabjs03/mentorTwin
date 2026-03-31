@@ -23,10 +23,16 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    const scrollArea = scrollAreaRef.current
+    if (!scrollArea) return
+
+    scrollArea.scrollTo({
+      top: scrollArea.scrollHeight,
+      behavior: 'smooth',
+    })
   }, [messages, loading])
 
   async function sendMessage(text?: string) {
@@ -100,8 +106,8 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
   }
 
   return (
-    <div className="flex-1 flex flex-col min-w-0">
-      <div className="px-5 py-3.5 border-b border-gray-100 flex items-center gap-2.5">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+      <div className="sticky top-0 z-10 flex items-center gap-2.5 border-b border-gray-100 bg-white/95 px-4 py-3.5 backdrop-blur-sm sm:px-5">
         <button
           onClick={() => router.push('/')}
           className="flex-shrink-0 w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center transition-colors text-gray-600 hover:text-gray-900"
@@ -114,13 +120,16 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
         <div className="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center text-white text-[11px] font-medium">
           {mentorName.split(' ').map(n => n[0]).join('')}
         </div>
-        <div>
-          <p className="text-sm font-medium text-gray-900">{mentorName} · AI Twin</p>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-medium text-gray-900">{mentorName} · AI Twin</p>
           <p className="text-[11px] text-gray-400">Responds based on verified session knowledge</p>
         </div>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-3.5">
+      <div
+        ref={scrollAreaRef}
+        className="flex min-h-0 flex-1 flex-col gap-3.5 overflow-y-auto px-4 py-4 scroll-smooth overscroll-contain sm:px-5"
+      >
         {messages.map((m, i) => (
           <MessageBubble key={i} message={m} />
         ))}
@@ -138,24 +147,22 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
         )}
 
         {messages.length === 1 && (
-          <div className="flex flex-row gap-2 mt-2">
-            <p className="text-xs text-gray-400 pt-2">Try asking:</p>
+          <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+            <p className="pt-1 text-xs text-gray-400 sm:pt-2">Try asking:</p>
             {SUGGESTIONS.map(s => (
               <button
                 key={s}
                 onClick={() => sendMessage(s)}
-                className="text-left text-xs bg-emerald-50 text-emerald-700 px-3 py-2 rounded-lg hover:bg-emerald-100 transition-colors"
+                className="rounded-lg bg-emerald-50 px-3 py-2 text-left text-xs text-emerald-700 transition-colors hover:bg-emerald-100 sm:max-w-xs"
               >
                 {s}
               </button>
             ))}
           </div>
         )}
-
-        <div ref={bottomRef} />
       </div>
 
-      <div className="px-4 py-3 border-t border-gray-100 flex items-end gap-2">
+      <div className="sticky bottom-0 z-10 flex items-end gap-2 border-t border-gray-100 bg-white/95 px-3 py-3 backdrop-blur-sm sm:px-4">
         <textarea
           value={input}
           onChange={e => {
@@ -171,12 +178,12 @@ export function TwinChat({ mentorId, mentorName }: { mentorId: string; mentorNam
           }}
           placeholder={`Ask ${mentorName} anything...`}
           rows={1}
-          className="flex-1 resize-none bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-sm text-gray-900 placeholder-gray-400 outline-none focus:border-emerald-400 max-h-24 leading-relaxed"
+          className="max-h-24 flex-1 resize-none rounded-xl border border-gray-200 bg-gray-50 px-3.5 py-2.5 text-sm leading-relaxed text-gray-900 outline-none placeholder-gray-400 focus:border-emerald-400"
         />
         <button
           onClick={() => sendMessage()}
           disabled={!input.trim() || loading}
-          className="w-9 h-9 rounded-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-200 flex items-center justify-center transition-colors flex-shrink-0"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-emerald-600 transition-colors hover:bg-emerald-700 disabled:bg-gray-200 sm:h-9 sm:w-9"
         >
           <svg className="w-4 h-4 text-white ml-0.5" viewBox="0 0 24 24" fill="currentColor">
             <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
